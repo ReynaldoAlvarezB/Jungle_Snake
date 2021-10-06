@@ -1,0 +1,15 @@
+.grid {
+    display: grid;
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    margin: 2.5%;
+    padding: 8px;
+
+    background: rgba(255, 255, 255, 0.8);
+
+    grid-template-columns: repeat(16,40px);
+    grid-template-rows: repeat(16,40px);
+    gap: 4px
+}
+
