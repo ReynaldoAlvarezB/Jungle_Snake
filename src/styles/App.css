@@ -3,9 +3,22 @@
 
 
 html, body {
-    background-image: url('../assets/jungle_background.jpg') ;
+    background-image: url('https://i.imgur.com/JsiEq3O.jpg') ;
     background-repeat: no-repeat;
     background-size: cover;
+
     font-family: 'Montserrat';
 }
 
+/* S20+ = 384 X 813 */
+
+@media (max-width: 425px) {
+    html, body {
+        background-image: url('https://i.imgur.com/6iDDo4m.jpg') ;
+        background-size: 1500px;
+
+        /* background-color: black; */
+        font-family: 'Montserrat';
+        transform: scale(1.20);
+    }
+}

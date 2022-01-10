@@ -4,6 +4,7 @@ import { Block } from './Block'
 
 
 
+
 export const Grid = () => {
     return (
         <div className = 'grid'>
@@ -39,6 +40,7 @@ export const Grid = () => {
             <Block c={23}/> <Block c={22}/> <Block c={21}/> <Block c={20}/> <Block c={19}/> <Block c={18}/> <Block c={17}/> <Block c={16}/>
             <Block c={15}/> <Block c={14}/> <Block c={13}/> <Block c={12}/> <Block c={11}/> <Block c={10}/> <Block c={9}/> <Block c={8}/>
             <Block c={7}/> <Block c={6}/> <Block c={5}/> <Block c={4}/> <Block c={3}/> <Block c={2}/> <Block c={1}/> <Block c={0}/>
+        
         </div>
     )
 }

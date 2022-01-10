@@ -5,7 +5,7 @@ import { App } from './Components/App';
 // ES6 Modules or TypeScript
 import Swal from 'sweetalert2'
 
-
+const score_box = document.getElementById('score_number')
 
 let score = 0
 
@@ -166,6 +166,7 @@ const moveSnake = () => {
             score+=100
             sendApple()
 
+            document.getElementById('score_number').innerHTML = String(score)
 
         }
 
@@ -177,10 +178,7 @@ const moveSnake = () => {
     }
 }
 
-const game_turn = () => {
-
-    console.log(score)
-    
+const game_turn = () => { 
     if (snake_is_alive) {
 
         clear()
@@ -194,15 +192,40 @@ const game_turn = () => {
 
     else {
 
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'You lose!',
-          })
+        // Swal.fire({
+        //     icon: 'error',
+        //     title: 'Oops...',
+        //     text: 'You lose!',
+        //   })
         pause()
     }
 
 }
+
+
+const change_d_left = () => snake_direction = 'left'
+const change_d_right = () => snake_direction = 'right'
+const change_d_up = () => snake_direction = 'up'
+const change_d_down = () => snake_direction = 'down'
+
+const space_functions = () => {
+    if (snake_is_alive) {
+        if (playing_condition === false) {
+            start()
+        }
+        else {
+            pause()
+        }
+    }
+    else {
+        setTimeout (restart, 1000)
+    }
+}
+const enter_functions = () => {
+    pause()
+    speed = 200 / parseFloat(prompt('Select speed between 0.25 and 2.0'))
+}
+
 
 const listenKey = (event) => {
 
@@ -214,50 +237,72 @@ const listenKey = (event) => {
 
     if (key === keys_codes.LEFT) {
         // console.log('Presionó  izquierda')
-        snake_direction = 'left'
+        // snake_direction = 'left'
+        change_d_left()
     }
     if (key === keys_codes.RIGHT) {
         // console.log('Presionó  derecha')
-        snake_direction = 'right'
+        // snake_direction = 'right'
+        change_d_right()
     }
     if (key === keys_codes.DOWN) {
         // console.log('Presionó  abajo')
-        snake_direction = 'down'
+        // snake_direction = 'down'
+        change_d_down()
     }
     if (key === keys_codes.UP) {
         // console.log('Presionó  arriba')
-        snake_direction = 'up'
+        // snake_direction = 'up'
+        change_d_up()
     }
     if (key === keys_codes.ESPACE) {
 
-        if (snake_is_alive) {
-            if (playing_condition === false) {
-                start()
-            }
-            else {
-                pause()
-            }
-        }
-        else {
-            setTimeout (restart, 1000)
-        }
-
+        // if (snake_is_alive) {
+        //     if (playing_condition === false) {
+        //         start()
+        //     }
+        //     else {
+        //         pause()
+        //     }
+        // }
+        // else {
+        //     setTimeout (restart, 1000)
+        // }
+        space_functions()
     }
+
+    
     if (key === keys_codes.ENTER) {
-        pause()
-        speed = 200 / parseFloat(prompt('Select speed between 0.25 and 2.0'))
+        // pause()
+        // speed = 200 / parseFloat(prompt('Select speed between 0.25 and 2.0'))
+        enter_functions()
     }
 
 
 }
 
 const appRender = async () => {
-    await ReactDOM.render( <App/> , divRoot);
+    await ReactDOM.render( <App score= {score}/> , divRoot);
 }
 
-appRender()
-createSnake()
-sendApple()
+const exe = async() => {
+    await appRender()
+    await createSnake()
+    await sendApple()
+    var button_up = document.getElementById('arrow_1') 
+    var button_left = document.getElementById('arrow_2') 
+    var button_right = document.getElementById('arrow_3') 
+    var button_down = document.getElementById('arrow_4')
+    var button_space = document.getElementById('space')
+    var button_enter = document.getElementById('enter')
+
+    button_up.addEventListener('click', change_d_up)
+    button_left.addEventListener('click', change_d_left)
+    button_right.addEventListener('click', change_d_right)
+    button_down.addEventListener('click', change_d_down)
+    button_space.addEventListener('click', space_functions)
+    button_enter.addEventListener('click', enter_functions)
+}
 
 window.onkeydown = listenKey;
 
@@ -271,6 +316,10 @@ const pause = () => {
 }
 const restart = () => {
     clear()
+    
+    score = 0
+    document.getElementById('score_number').innerHTML = String(score)
+
     snake_direction = 'down'
     snakePath = [[8,7],[8,8],[8,9]]
     createSnake()
@@ -279,6 +328,5 @@ const restart = () => {
     start()
 }
 
-
-
+exe()
 

@@ -11,7 +11,7 @@ export const Block = ({c}) => {
     
     return (
         <div className= 'blocks' id = {id} >
-            {/* <img className = 'block_img' src = {manzana} /> */}
+            
         </div>
     )
 }
